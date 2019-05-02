@@ -1,0 +1,286 @@
+<html>
+{% load static %}
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- -------------------------- -->
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="{% static 'match/jquery.jqplot.js' %}"></script>
+    <script type="text/javascript" src="{% static 'match/plugins/jqplot.json2.js' %}"></script>
+
+    <link rel="stylesheet" type="text/css" src="{% static 'match/jquery.jqplot.css' %}" />
+
+<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="excanvas.js"></script><![endif]-->
+
+    <script language="javascript" type="text/javascript" src="{% static 'match/jquery.js' %}"></script>
+    <script language="javascript" type="text/javascript" src="{% static 'match/jquery.jqplot.js' %}"></script>
+    <script language="javascript" type="text/javascript" src="{% static 'match/plugins/jqplot.barRenderer.js' %}"></script>
+    <script language="javascript" type="text/javascript" src="{% static 'match/plugins/jqplot.dateAxisRenderer.js' %}"></script>
+    <script language="javascript" type="text/javascript" src="{% static 'match/plugins/jqplot.canvasTextRenderer.js' %}"></script>
+    <script language="javascript" type="text/javascript" src="{% static 'match/plugins/jqplot.canvasAxisTickRenderer.js' %}"></script>
+    <script language="javascript" type="text/javascript" src="{% static 'match/plugins/jqplot.categoryAxisRenderer.js' %}"></script>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'match/jquery.jqplot.css' %}" />
+      <!-- 
+    <script class="code" type="text/javascript">
+      $(document).ready(function(){
+        $.jqplot.config.enablePlugins = true;
+        var s1 = [2, 6, 7, 10];
+        var ticks = ['a', 'b', 'c', 'd'];
+         
+        plot1 = $.jqplot('chart1', [s1], {
+            // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+            animate: !$.jqplot.use_excanvas,
+            seriesDefaults:{
+                renderer:$.jqplot.BarRenderer,
+                pointLabels: { show: true }
+            },
+            axes: {
+                xaxis: {
+                    renderer: $.jqplot.CategoryAxisRenderer,
+                    ticks: ticks
+                }
+            },
+            highlighter: { show: false }
+        });
+     
+        $('#chart1').bind('jqplotDataClick', 
+            function (ev, seriesIndex, pointIndex, data) {
+                $('#info1').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+            }
+        );
+    });
+    
+  </script> --> 
+
+ <!--  <script>
+    $(document).ready(function(){
+      var plot1 = $.jqplot ('chart2', [[3,7,9,1,5,3,8,2,5]]);
+    });
+  </script> -->
+
+  <script>
+    $(document).ready(function(){
+      var plot1 = $.jqplot ('chart3', [[3,7,9,1,5,3,8,2,5],[1,5,3,4,2,5,4,3,4]],{
+        title: 'Runs vs Overs',
+        series:[
+          {
+            markerOptions: {color: "red"}
+          },
+          {
+            markerOptions: {color: "blue"}
+          }
+        ]
+      });
+    });
+  </script>
+
+
+  <script>
+    $(document).ready(function(){
+      var plot1 = $.jqplot ('chart2', [[3,7,9,1,5,3,8,null,5],[1,5,3,4,2,5,4,3,4]],{
+        title: 'Wickets vs Overs',
+        series:[
+          {
+            markerOptions: {color: "red"}
+          },
+          {
+            markerOptions: {color: "blue"}
+          }
+        ]
+      });
+    });
+  </script>
+
+<!--   <script>
+    $(document).ready(function(){
+  var plot1 = $.jqplot('chart4', [[1,2,3,4,5,6,3,1,4,2,6,8,4,1,2,4,3,2,1,]], { 
+      title: 'Google, Inc.', 
+      series: [{ 
+          label: 'Google, Inc.', 
+          neighborThreshold: -1 
+      }], 
+      axes: { 
+          xaxis: { 
+              renderer: $.jqplot.DateAxisRenderer
+          }, 
+          yaxis: { 
+              tickOptions:{ prefix: '$' } 
+          } 
+      }, 
+      cursor:{ 
+        show: true,
+        zoom:true, 
+        showTooltip:false
+      } 
+  });
+ 
+  $('.button-reset').click(function() { plot1.resetZoom() });
+});
+  </script>
+  
+ -->    
+    <!-- ----------------------------------- -->
+
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        Cricket Visualizer
+      </h1>
+    <!-- <form> -->
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="inputState">Match Type</label>
+          <select id="inputState" class="form-control" onchange="runFunc(this.value, 'Match')">
+            <option>Choose..</option>
+            <option>ODI</option>
+            <option>T20</option>
+            <option>IPL</option>
+          </select>
+        </div>
+         <div class="form-group col-md-3">
+          <label for="inputState2">Year</label>
+          <select id="inputState2" class="form-control" onchange="runFunc(this.value, 'Year')">
+           <!--  <option>Choose..</option>
+            <option>2018</option>
+            <option>2017</option> -->
+          </select>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputState3">Team</label>
+          <select id="inputState3" class="form-control" onchange="runFunc(this.value, 'Team')">
+            <!-- <option>Choose..</option>
+            <option>India</option>
+            <option>Australia</option>
+            <option>Pakistan</option> -->
+          </select>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputState4">Match</label>
+          <select id="inputState4" class="form-control" onchange="runFunc(this.value, 'Vs')">
+           <!--  <option>Choose..</option>
+            <option>vs India 22/6/2018</option>
+            <option>vs Australia 26/7/2018</option>
+            <option>vs Pakistan 10/1/2018</option> -->
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" onclick="graph()">Generate</button>
+    <!-- </form>     -->
+  </div>
+  <center>
+    <div style="height: 300px; width: 800px">
+      <div id="chart1" style="width:45%; float: left"></div>
+      <div id="chart2"></div> 
+    </div>
+    
+  <div id="chart3" style="width:800px; height: 300px;"></div> 
+  
+  </center>
+  <!-- <div id="chart4" style="width:400px; height: 300px;"></div>  -->
+
+
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+
+
+    <script type="text/javascript">
+      function graph(){
+        var mtype = document.getElementById("inputState").value;
+        var year = document.getElementById("inputState2").value;
+        var team1 = document.getElementById("inputState3").value;
+        var detail = document.getElementById("inputState4").value;
+        // console.log(detail)
+        var date = detail.split(" ");
+        date = date[date.length - 1];
+
+        console.log(mtype);
+        console.log(team1);
+        // console.log(team2);
+        console.log(date); 
+
+        var wickets1 = new Array();
+        var count_w1 = 0;
+        var wickets2 = new Array();
+        var count_w2 = 0;
+
+        $.ajax({
+          type: "GET",
+          url : "get-matches/",
+          dataType: "json",
+          data: {"team": team1, "date": date, "competition": mtype},
+          success : function (value) {
+                console.log(value);
+          }
+       });
+
+
+      }
+    </script>
+    <script>
+      function runFunc(val, type){
+        // $("#inputState2").empty();
+
+        if(type==='Match'){
+          dates = new Set();
+          {% for match in matches %}
+            if("{{ match.competition }}" == val){
+              dates.add("{{match.date|date:'Y'}}");
+            }
+          {% endfor %}
+          for(var it = dates.values(), val= null; val=it.next().value;){
+            console.log(val);
+            $("#inputState2").append("<option>"+val+"</option>");
+          }
+        }
+
+        else if(type === 'Year'){
+          var mtype = document.getElementById("inputState").value;
+          // console.log("Year");
+          // console.log(mtype);
+          teams = new Set();
+          {% for match in matches %}
+            if(mtype === "{{ match.competition }}" && val === "{{match.date|date:'Y'}}"){
+              teams.add("{{match.team1}}");
+              teams.add("{{match.team2}}");
+            }
+          {% endfor %}
+
+          for(var it = teams.values(), val= null; val=it.next().value;){
+            console.log(val);
+            $("#inputState3").append("<option>"+val+"</option>");
+          }
+        }
+
+        else if(type === 'Team'){
+          var mtype = document.getElementById("inputState").value;
+          var year = document.getElementById("inputState2").value;
+         console.log("vs Matches-----------");
+         console.log(mtype);
+         console.log(year);
+          {% for match in matches %}
+            if(mtype === "{{ match.competition }}" && year === "{{match.date|date:'Y'}}"){
+              console.log("{{match.team1}}");
+              console.log("{{match.team2}}");
+              if("{{match.team1}}" === val){
+                $("#inputState4").append("<option>vs"+" {{match.team2}}"+ " {{match.date|date:'d/m/Y'}}" +"</option>");
+              }
+              else if("{{match.team2}}" === val){
+                $("#inputState4").append("<option>vs"+" {{match.team1}}"+ " {{match.date|date:'d/M/Y'}}" +"</option>");
+              }
+            }
+          {% endfor %}
+
+        }
+        else if(type === 'Vs'){
+
+        }
+
+        // console.log(val);
+      }
+    </script>
+  </body>
+  
+</html>

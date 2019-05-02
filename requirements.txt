@@ -1,1 +1,10 @@
-
+Django                 2.2.1  
+djangorestframework    3.9.3  
+mysql-connector-python 8.0.13 
+pip                    19.1   
+protobuf               3.7.1  
+pytz                   2019.1 
+setuptools             41.0.1 
+six                    1.12.0 
+sqlparse               0.3.0  
+wheel                  0.33.1 
